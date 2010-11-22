@@ -6,11 +6,11 @@ Requires at least: 3.0
 Tested up to: 3.0
 Stable tag: 0.1
 
-TinyMCE Preformatted plugin will enable to insert preformatted text like <pre>...</pre> to WordPress Visual Editor.
+TinyMCE Preformatted plugin will enable to insert preformatted text like &lt;pre&gt;...&lt;/pre&gt; to WordPress Visual Editor.
 
 == Description ==
 
-TinyMCE Preformatted plugin will enable to insert preformatted text like <pre>...</pre> to WordPress Visual Editor.
+TinyMCE Preformatted plugin will enable to insert preformatted text like &lt;pre&gt;...&lt;/pre&gt; to WordPress Visual Editor.
 
 This plugin add [PRE] button to Visual Editor, you can input HTML, PHP, Perl and other sources and then HTML will be escaped.
 
