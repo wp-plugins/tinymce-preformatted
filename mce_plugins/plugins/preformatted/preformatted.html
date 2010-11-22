@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{#preformatted_dlg.title}</title>
+	<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
+	<script type="text/javascript" src="js/preformatted.js"></script>
+	<link href="css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body onresize="PreformattedDialog.resize();"> 
+	<form onsubmit="PreformattedDialog.insert();return false;">
+        <textarea id="source" style="width:100%;"></textarea>
+		<div class="mceActionPanel">
+			<div style="float: left">
+				<input type="submit" id="insert" name="insert" value="{#insert}" />
+			</div>
+
+			<div style="float: right">
+				<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+			</div>
+
+			<br style="clear:both" />
+		</div>
+	</form>
+</body> 
+</html> 
