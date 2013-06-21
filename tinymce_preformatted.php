@@ -4,7 +4,7 @@ Plugin Name: TinyMCE Preformatted
 Plugin URI: http://firegoby.theta.ne.jp/wp/mce_preformatted
 Description: Insert preformatted source.
 Author: Takayuki Miyauchi
-Version: 0.3.1
+Version: 0.4.0
 Author URI: http://firegoby.theta.ne.jp/
 */
 
@@ -30,7 +30,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-define('TINYMCE_PREFORMATTED_PLUGIN_URL', WP_PLUGIN_URL.'/'.dirname(plugin_basename(__FILE__)));
+define('TINYMCE_PREFORMATTED_PLUGIN_URL', plugins_url('', __FILE__));
 
 require_once(dirname(__FILE__).'/includes/mceplugins.class.php');
 new mcePreformatted();
@@ -39,17 +39,47 @@ class mcePreformatted{
 
 function __construct()
 {
+    if (is_admin()) {
+        add_action('admin_head', array($this, 'admin_head'));
+        add_action('plugins_loaded', array($this, 'plugins_loaded'));
+        add_filter('wp_fullscreen_buttons', array($this, 'wp_fullscreen_buttons'));
+    }
+}
+
+public function admin_head()
+{
+    echo '<style type="text/css">';
+    printf(
+        'span.mce_preformatted{background-image: url(%s) !important; background-position: center center !important;}',
+        TINYMCE_PREFORMATTED_PLUGIN_URL.'/mce_plugins/plugins/preformatted/img/icon.png'
+    );
+    echo '</style>';
+}
+
+public function wp_fullscreen_buttons($buttons)
+{
+    $buttons[] = 'separator';
+    $buttons['preformatted'] = array(
+        'title' => __('Preformatted'),
+        'onclick' => "tinyMCE.execCommand('mcePreformatted');",
+        'both' => false
+    );
+    return $buttons;
+}
+
+public function plugins_loaded()
+{
     $path = '/mce_plugins/plugins/preformatted';
     new mcePlugins(
         'preformatted',
         TINYMCE_PREFORMATTED_PLUGIN_URL.'/mce_plugins/plugins/preformatted/editor_plugin.js',
         dirname(__FILE__).'/mce_plugins/plugins/preformatted/langs/langs.php',
-        array(&$this, 'addPreformattedButton'),
+        array($this, 'add_button'),
         false
     );
 }
 
-public function addPreformattedButton($buttons){
+public function add_button($buttons){
     array_unshift($buttons, '|');
     array_unshift($buttons, 'preformatted');
     return $buttons;
@@ -57,4 +87,3 @@ public function addPreformattedButton($buttons){
 
 }
 
-?>
