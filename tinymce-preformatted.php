@@ -4,7 +4,7 @@ Plugin Name: TinyMCE Preformatted
 Plugin URI: http://firegoby.theta.ne.jp/wp/mce_preformatted
 Description: Insert preformatted source.
 Author: Takayuki Miyauchi
-Version: 0.4.0
+Version: 0.5.0
 Author URI: http://firegoby.theta.ne.jp/
 */
 
@@ -33,7 +33,8 @@ THE SOFTWARE.
 define('TINYMCE_PREFORMATTED_PLUGIN_URL', plugins_url('', __FILE__));
 
 require_once(dirname(__FILE__).'/includes/mceplugins.class.php');
-new mcePreformatted();
+
+$mce_preformatted = new mcePreformatted();
 
 class mcePreformatted{
 
@@ -67,13 +68,36 @@ public function wp_fullscreen_buttons($buttons)
     return $buttons;
 }
 
+public function wp_mce_translation($mce_translation)
+{
+    $mce_translation['Insert template'] = __("Insert template", "tinymce_templates");
+    $mce_translation['Templates'] = __("Templates", "tinymce_templates");
+    $mce_translation['No templates defined'] = __("No templates defined", "tinymce_templates");
+
+    return $mce_translation;
+}
+
 public function plugins_loaded()
 {
+    global $wp_version;
+    if (!(version_compare($wp_version, "3.9") < 0)) {
+        add_filter('wp_mce_translation', array($this, 'wp_mce_translation'));
+    }
+
+    global $wp_version;
+    if (version_compare($wp_version, "3.9") < 0) {
+        $plugin = TINYMCE_PREFORMATTED_PLUGIN_URL.'/mce_plugins/3.5/plugins/preformatted/editor_plugin.js';
+        $langs  = dirname(__FILE__).'/mce_plugins/plugins/preformatted/langs/langs.php';
+    } else {
+        $plugin = TINYMCE_PREFORMATTED_PLUGIN_URL.'/mce_plugins/4.0/plugins/preformatted/plugin.js';
+        $langs  = '';
+    }
+
     $path = '/mce_plugins/plugins/preformatted';
     new mcePlugins(
         'preformatted',
-        TINYMCE_PREFORMATTED_PLUGIN_URL.'/mce_plugins/plugins/preformatted/editor_plugin.js',
-        dirname(__FILE__).'/mce_plugins/plugins/preformatted/langs/langs.php',
+        $plugin,
+        $langs,
         array($this, 'add_button'),
         false
     );
