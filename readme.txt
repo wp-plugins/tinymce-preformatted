@@ -1,10 +1,9 @@
 === TinyMCE Preformatted ===
 Contributors: miyauchi
-Donate link: http://wpist.me/
 Tags: tinymce, Visual Editor, pre, preformatted
 Requires at least: 3.0
-Tested up to: 3.9
-Stable tag: 0.5.0
+Tested up to: 4.1
+Stable tag: 0.6.0
 
 TinyMCE Preformatted plugin will enable to insert preformatted text like &lt;pre&gt;...&lt;/pre&gt; to WordPress Visual Editor.
 
@@ -44,4 +43,3 @@ The author must acknowledge the thing that the operation guarantee and the suppo
 == Contact ==
 
 email to miya[at]theta.ne.jp
-

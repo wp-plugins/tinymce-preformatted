@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: TinyMCE Preformatted
-Plugin URI: http://firegoby.theta.ne.jp/wp/mce_preformatted
+Plugin URI: https://github.com/miya0001/tinymce-preformatted
 Description: Insert preformatted source.
 Author: Takayuki Miyauchi
-Version: 0.5.0
-Author URI: http://firegoby.theta.ne.jp/
+Version: 0.6.0
+Author URI: https://github.com/miya0001/
 */
 
 /*
-Copyright (c) 2010 Takayuki Miyauchi (THETA NETWORKS Co,.Ltd).
+Copyright (c) 2010 Takayuki Miyauchi
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -110,4 +110,3 @@ public function add_button($buttons){
 }
 
 }
-
